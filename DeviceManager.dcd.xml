@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE deviceconfiguration PUBLIC "-//JTRS//DTD SCA V2.2.2 DCD//EN" "deviceconfiguration.dtd">
+<deviceconfiguration id="DCE:4c484df8-ef4b-4798-98d9-4867e2e05cf0" name="ex.simpleGPSNode">
+  <devicemanagersoftpkg>
+    <localfile name="/mgr/DeviceManager.spd.xml"/>
+  </devicemanagersoftpkg>
+  <componentfiles>
+    <componentfile id="simpleGPS_93705df3-646d-4d52-87c8-1352861a908e" type="SPD">
+      <localfile name="/devices/ex/simpleGPS/simpleGPS.spd.xml"/>
+    </componentfile>
+    <componentfile id="GPP_eff0b212-40aa-42b6-a526-c601279cbe5e" type="SPD">
+      <localfile name="/devices/GPP/GPP.spd.xml"/>
+    </componentfile>
+  </componentfiles>
+  <partitioning>
+    <componentplacement>
+      <componentfileref refid="simpleGPS_93705df3-646d-4d52-87c8-1352861a908e"/>
+      <componentinstantiation id="ex.simpleGPSNode:simpleGPS_1">
+        <usagename>simpleGPS_1</usagename>
+      </componentinstantiation>
+    </componentplacement>
+    <componentplacement>
+      <componentfileref refid="GPP_eff0b212-40aa-42b6-a526-c601279cbe5e"/>
+      <componentinstantiation id="ex.simpleGPSNode:GPP_1">
+        <usagename>GPP_1</usagename>
+      </componentinstantiation>
+    </componentplacement>
+  </partitioning>
+  <connections>
+    <connectinterface id="connection_1">
+      <usesport>
+        <usesidentifier>gpsinfo_out</usesidentifier>
+        <componentinstantiationref refid="ex.simpleGPSNode:simpleGPS_1"/>
+      </usesport>
+      <componentsupportedinterface>
+        <supportedidentifier>IDL:ExtendedEvent/MessageEvent:1.0</supportedidentifier>
+        <findby>
+          <domainfinder name="GlobalGPS" type="eventchannel"/>
+        </findby>
+      </componentsupportedinterface>
+    </connectinterface>
+  </connections>
+  <domainmanager>
+    <namingservice name="REDHAWK_DEV/REDHAWK_DEV"/>
+  </domainmanager>
+</deviceconfiguration>
